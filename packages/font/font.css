@@ -1,0 +1,58 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 3164983 */
+  src: url('//at.alicdn.com/t/font_3164983_9pymblo0b45.woff2?t=1645945532781') format('woff2'),
+       url('//at.alicdn.com/t/font_3164983_9pymblo0b45.woff?t=1645945532781') format('woff'),
+       url('//at.alicdn.com/t/font_3164983_9pymblo0b45.ttf?t=1645945532781') format('truetype');
+}
+
+[class*='icon-']  {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-close:before {
+  content: "\e747";
+}
+
+.icon-all:before {
+  content: "\e6ef";
+}
+
+.icon-nav-list:before {
+  content: "\e6fd";
+}
+
+.icon-pic:before {
+  content: "\e6ff";
+}
+
+.icon-Notvisible:before {
+  content: "\e6fe";
+}
+
+.icon-zhixianghuishou:before {
+  content: "\e61c";
+}
+
+.icon-kehuishou-bolilei:before {
+  content: "\e61f";
+}
+
+.icon-kehuishou-suliaolei:before {
+  content: "\e620";
+}
+
+.icon-kehuishou-zhilei:before {
+  content: "\e621";
+}
+
+.icon-youhailaji:before {
+  content: "\e625";
+}
+
+.icon-qitalaji-chongwufenbian:before {
+  content: "\e630";
+}
