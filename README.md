@@ -329,3 +329,173 @@ radio的基本使用
 | label    | 单选框的value值 |          |        |
 | name     | name            |          |        |
 
+
+
+
+
+## 项目打包
+
+1. 新建packages目录，将所有组件与css放入目录中。
+
+2. packages目录中新建index.js文件
+
+   ```js
+   
+   // 整个包的入口
+   // 统一导出
+   // 导出颜色选择器组件
+   import Button from './button'
+   import Dialog from './dialog'
+   import Input from './input'
+   import Radio from './radio'
+   import Switch from './switch'
+   import './font/font.css'
+    
+   const components = [
+     Button,
+     Dialog,
+     Input,
+     Radio,
+     Switch
+   ]
+   // 定义install方法
+   const install = function (Vue) {
+     // 注册所有的组件
+     components.forEach(component => {
+       Vue.component(component.name, component)
+     })
+   }
+   // 判断是否直接引入文件，如果是，就不用调用Vue.use()
+   // 如果不是模块化开发，而是scripts引入Vue，这样就不用再调用Vue.use
+   if (typeof window !== 'undefined' && window.Vue) {
+     install(window.Vue)
+   }
+   // 导出install方法
+   export default {
+     install
+   }
+   ```
+
+3. 将src目录更名为examples
+
+4. 项目根目录下新建vue.config.js
+
+   ```javascript
+   
+   const path = require('path')
+   module.exports = {
+     pages:{
+       index:{
+         // 修改项目入口文件
+         entry:'examples/main.js',
+         template:'public/index.html',
+         filename:'index.html'
+       }
+     },
+     // 扩展webpack配置,使webpages加入编译
+     chainWebpack: config => {
+       config.module
+       .rule('js')
+       .include.add(path.resolve(__dirname,'packages')).end()
+       .use('babel')
+       .loader('babel-loader')
+       .tap(options => {
+         return options
+       })
+     }
+   }
+   ```
+
+   
+
+
+
+
+
+
+
+## npm发布
+
+package.json加一条命令，参考
+
+[vue-cli]: https://cli.vuejs.org/zh/guide/build-targets.html
+
+```
+"lib":"vue-cli-service build --target lib packages/index.js"
+```
+
+将项目推到github，管理代码
+
+
+
+package.json中private改成false
+
+```
+"private": false,
+```
+
+
+
+package.json 加一个main属性，指定默认的入口文件
+
+```
+  "main":"dist/unleashui.umd.min.js",
+```
+
+
+
+新增.npmignore文件
+
+```
+# 忽略目录
+examples/
+packages/
+public/
+ 
+# 忽略指定文件
+vue.config.js
+babel.config.js
+*.map
+```
+
+
+
+
+
+查看当前npm镜像源，一般为淘宝镜像地址
+
+```shell
+npm get registry
+```
+
+
+
+切换到npm官方镜像地址
+
+```shell
+npm config set registry https://registry.npmjs.org/
+```
+
+
+
+记得最后切回淘宝镜像地址
+
+```shell
+npm config set registry http://registry.npm.taobao.org/
+```
+
+
+
+1. 先登录npm 
+
+    ```shell
+    npm login
+    ```
+
+ 2. 发布
+
+    ```shell
+    npm publish
+    ```
+
+    
